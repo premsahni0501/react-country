@@ -1,26 +1,37 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import CountryList from './component/CountryList';
+import CountrySelected from './component/CountrySelected';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import country from 'country-json/src/country-by-flag';
+
+class App extends React.Component {
+  state = {
+    selectedCountry: {
+      name: '',
+      flag: ''
+    }
+  }
+  onCountrySelected = (countryName) =>{
+    const countryMatched = country.find(item=>item.country === countryName);
+    console.log(countryName, countryMatched);
+    let found = {
+      name: countryMatched.country,
+      flag: countryMatched.flag_base64
+    }
+    this.setState({
+      selectedCountry: {...found}
+    })
+  }
+  render(){
+    console.log(country);
+    return (
+      <div className="App">
+        <CountryList countries={country} onCountrySelected={this.onCountrySelected}></CountryList>
+        <CountrySelected selected={this.state.selectedCountry}/>
+      </div>
+    );
+  }
 }
 
 export default App;
