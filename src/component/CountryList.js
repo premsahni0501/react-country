@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import CountryItem from './CountryItem';
 
 class CountryList extends Component{
     state = {
@@ -14,10 +15,11 @@ class CountryList extends Component{
     }
     render(){
         return (
-            <select value={this.state.value} className="form-control" onChange={this.onCountrySelected}>
-                <option disabled>Select Country</option>
+            <select value={this.state.value} className="form-control" 
+            onChange={this.onCountrySelected}>
+                <option disabled value={''}>Select Country</option>
                 {this.props.countries.map((country, indx)=>{
-                    return <option key={indx} value={country.country}>{country.country}</option>
+                    return <CountryItem key={indx} value={country.country}/>
                 })}
             </select>
         );

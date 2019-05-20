@@ -14,7 +14,6 @@ class App extends React.Component {
   }
   onCountrySelected = (countryName) =>{
     const countryMatched = country.find(item=>item.country === countryName);
-    console.log(countryName, countryMatched);
     let found = {
       name: countryMatched.country,
       flag: countryMatched.flag_base64
@@ -24,7 +23,6 @@ class App extends React.Component {
     })
   }
   render(){
-    console.log(country);
     return (
       <div className="App">
         <CountryList countries={country} onCountrySelected={this.onCountrySelected}></CountryList>
